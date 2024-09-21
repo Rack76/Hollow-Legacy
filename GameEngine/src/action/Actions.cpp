@@ -137,8 +137,7 @@ namespace Action
 		float xMotion = std::get<0>(data);
 		float yMotion = std::get<1>(data);
 		float dt = std::get<2>(data);
-		xMotion *= 0.001;
-		yMotion *= 0.001;
+		
 		camera->rotateCamera(xMotion, yMotion, dt);
 	}
 }

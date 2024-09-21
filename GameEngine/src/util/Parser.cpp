@@ -5,7 +5,7 @@
 
 namespace HollowEngine
 {
-	void Parser::getModelData(const char* filepath, std::vector<float>& positions, std::vector<float>& texCoords)
+	void Parser::getModelData(const char* filepath, std::vector<float>& triangles, std::vector<float>& texCoords, std::vector<float>& vertices)
 	{
 		std::string geometryId;
 		std::string positionsString;
@@ -18,14 +18,14 @@ namespace HollowEngine
 		std::fstream file(filepath, std::ios_base::in | std::ios_base::out | std::ios_base::binary);
 		assertNoAbort(file.is_open(), "could not open file " + std::string(filepath));
 		extractLineContent(file, geometryId, "geometry id=\"", "\"", "\"");
-		extractLineContent(file, positionsString,  std::string(geometryId + "-positions-array").c_str(), ">", "<");
-		
+		extractLineContent(file, positionsString, std::string(geometryId + "-positions-array").c_str(), ">", "<");
+
 		std::stringstream ss(positionsString);
 		float position;
 		while (!ss.eof())
 		{
 			ss >> position;
-			positions.push_back(position);
+			vertices.push_back(position);
 		}
 
 		extractLineContent(file, texCoordsString, std::string(geometryId + "-map-0-array").c_str(), ">", "<");
@@ -51,7 +51,8 @@ namespace HollowEngine
 			textureIndices.push_back(index);
 		}
 
-		orderArray(positions, positionIndices, 3);
+		triangles = vertices;
+		orderArray(triangles, positionIndices, 3);
 		orderArray(texCoords, textureIndices, 2);
 	}
 

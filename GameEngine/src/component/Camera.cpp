@@ -34,6 +34,8 @@ namespace HollowEngine
 
 		AssetManager::Shader::setUniform("perspective", &perspective[0][0]);
 
+		transform->orientation[0] = -transform->orientation[0];
+
 		if (activeCamera == -1)
 			activeCamera = entityId;
 	}
@@ -42,10 +44,10 @@ namespace HollowEngine
 	{
 		xAngle -= _xAngle;
 		yAngle -= _yAngle;
-		if (yAngle > glm::radians(88.0f))
-			yAngle = glm::radians(88.0f);
-		if (yAngle < -glm::radians(88.0f))
-			yAngle = -glm::radians(88.0f);
+		if (yAngle > 88.0f)
+			yAngle = 88.0f;
+		if (yAngle < -88.0f)
+			yAngle = -88.0f;
 		Transform* transform = EntityManager::getComponent<Transform>(entityId);
 		transform->identity().rotateYWorld(xAngle).rotateXWorld(yAngle);
 		update(dt);
