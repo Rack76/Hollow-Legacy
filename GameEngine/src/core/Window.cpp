@@ -87,6 +87,7 @@ namespace HollowEngine
 		auto functionPointers = new std::vector<void*>;
 		glfwSetWindowUserPointer(window, (void*)functionPointers);
 		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+		glfwSetCursorPos(window, 0, 0);
 	}
 
 	Window::~Window()

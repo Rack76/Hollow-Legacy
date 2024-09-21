@@ -16,8 +16,8 @@ namespace HollowEngine
         }
 
     protected:
-        Singleton<T>()                    = default;
-        Singleton<T>(const Singleton<T>&) = default;
+        Singleton()                    = default;
+        Singleton(const Singleton<T>&) = default;
     };
 }  // namespace HollowEngine
 
